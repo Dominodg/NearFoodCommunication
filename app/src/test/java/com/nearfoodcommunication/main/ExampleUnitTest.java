@@ -1,4 +1,4 @@
-package com.example.goiad.helloworld;
+package com.nearfoodcommunication.main;
 
 import org.junit.Test;
 

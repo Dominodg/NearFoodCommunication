@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
     NfcAdapter mNfcAdapter;
 
     public void turnOnNfcBeam(){

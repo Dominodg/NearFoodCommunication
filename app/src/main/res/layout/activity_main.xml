@@ -7,44 +7,45 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/etEmailAddress"
+        style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
         android:layout_width="273dp"
         android:layout_height="60dp"
         android:layout_marginTop="136dp"
         android:ems="10"
-        android:hint="@string/login_data"
+        android:hint="Enter your email"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/etPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="login"
+        android:onClick="@string/login_data"
         android:text="@string/button_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/etPassword"
+        style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
         android:layout_width="273dp"
         android:layout_height="60dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
-        android:hint="@string/login_data_pass"
+        android:hint="Enter your password"
         android:inputType="textPassword"
-        android:text="@string/login_data_pass"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/etEmailAddress" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -52,4 +53,21 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.15" />
+
+    <TextView
+        android:id="@+id/Info"
+        android:layout_width="108dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword"
+        app:layout_constraintVertical_bias="0.397" />
 </android.support.constraint.ConstraintLayout>

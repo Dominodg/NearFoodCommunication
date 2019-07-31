@@ -6,17 +6,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
-import android.nfc.NfcEvent;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "com.example.helloworld.MESSAGE";
 
     public static String TAG = "NFCLINK" + MainActivity.class.getSimpleName();
+
+    private EditText emailAddress;
+    private EditText password;
+    private TextView info;
+    private Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +30,23 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "getLink");
 
         setContentView(R.layout.activity_main);
+
+        emailAddress = (EditText)findViewById(R.id.etEmailAddress);
+        password = (EditText)findViewById(R.id.etPassword);
+        info = (TextView)findViewById(R.id.Info);
+        login = (Button)findViewById(R.id.btnLogin);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginValidate(emailAddress.getText().toString(), password.getText().toString());
+            }
+        });
     }
 
     NfcAdapter mNfcAdapter;
 
-    public void turnOnNfcBeam(){
+    public void turnOnNfcBeam () {
 
         if(mNfcAdapter == null)
         {
@@ -43,12 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void login(View view)
+    private void loginValidate(String userEmailAddress, String userPassword)
     {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String email = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, email);
-        startActivity(intent);
+        if ((userEmailAddress.equals("mlc@gmail.com")) && (userPassword.equals("12345"))) {
+            Intent intent = new Intent(MainActivity.this, DisplayMessageActivity.class);
+            startActivity(intent);
+        } else {
+            info.setText("Your email or your password is incorrect");
+        }
+
     }
 }

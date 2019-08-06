@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hello world</string>
+    <string name="app_name">Near Food Communication</string>
     <string name="login_data">Enter your email</string>
     <string name="button_login">Login</string>
     <string name="login_data_pass">Password</string>

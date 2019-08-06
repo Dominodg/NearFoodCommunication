@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText password;
     private TextView info;
     private Button login;
+    private Button signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +33,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         emailAddress = (EditText)findViewById(R.id.etEmailAddress);
-        password = (EditText)findViewById(R.id.etPassword);
-        info = (TextView)findViewById(R.id.Info);
+        password = (EditText)findViewById(R.id.etPasswordSU);
+        info = (TextView)findViewById(R.id.InfoSU);
         login = (Button)findViewById(R.id.btnLogin);
+        signup = (Button)findViewById(R.id.btnSignupSU);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loginValidate(emailAddress.getText().toString(), password.getText().toString());
+            }
+        });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signUp();
             }
         });
     }
@@ -62,12 +71,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void loginValidate(String userEmailAddress, String userPassword)
     {
-        if ((userEmailAddress.equals("mlc@gmail.com")) && (userPassword.equals("12345"))) {
+        info.setText(" ");
+        if ((userEmailAddress.equals("a")) && (userPassword.equals("a"))) {
             Intent intent = new Intent(MainActivity.this, DisplayMessageActivity.class);
             startActivity(intent);
         } else {
-            info.setText("Your email or your password is incorrect");
+            info.setText("Your email or your password is incorrect.");
         }
 
+    }
+
+    private void signUp()
+    {
+        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+        startActivity(intent);
     }
 }

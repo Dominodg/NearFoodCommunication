@@ -40,6 +40,7 @@
                 android:resource="@xml/tech_filter" />
         </activity>
         <activity android:name=".DisplayMessageActivity" />
+        <activity android:name=".SignUpActivity" />
     </application>
 
 </manifest>

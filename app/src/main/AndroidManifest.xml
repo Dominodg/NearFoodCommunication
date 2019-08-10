@@ -41,6 +41,7 @@
         </activity>
         <activity android:name=".DisplayMessageActivity" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".MenuActivity" />
     </application>
 
 </manifest>

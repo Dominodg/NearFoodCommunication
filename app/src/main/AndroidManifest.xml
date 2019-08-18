@@ -6,11 +6,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-sdk android:minSdkVersion="10"/>
 
     <!--<intent-filter>-->
         <!--<action android:name="android.nfc.action.NDEF_DISCOVERED"/>-->
-        <!--<action android:name="android.intent.category.DEFAULT"/>;-->
+        <!--<action android:name="android.intent.category.DEFAULT"/>-->
         <!--<data android:scheme="http"-->
             <!--android:host="nearfoodcommunication.android.com"-->
             <!--android:pathPrefix="/MainActivity.java" />-->
@@ -27,12 +26,24 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-                <action android:name="android.intent.category.DEFAULT"/>;
+                <action android:name="android.intent.category.DEFAULT"/>
                 <data android:scheme="http"
                     android:host="nearfoodcommunication.android.com"
+                    android:pathPrefix="/MainActivity.java" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.nearfoodcommunication.main.MainActivity"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <data android:scheme="http"
+                    android:host="nearfoodcommunication.com"
                     android:pathPrefix="/MainActivity.java" />
             </intent-filter>
 

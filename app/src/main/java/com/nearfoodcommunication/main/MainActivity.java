@@ -16,8 +16,6 @@ import com.nearfoodcommunication.register.SignUpActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String EXTRA_MESSAGE = "com.example.helloworld.MESSAGE";
-
     public static String TAG = "NFCLINK" + MainActivity.class.getSimpleName();
 
     private EditText emailAddress;

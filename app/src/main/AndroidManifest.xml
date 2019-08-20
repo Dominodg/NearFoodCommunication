@@ -7,14 +7,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <!--<intent-filter>-->
-        <!--<action android:name="android.nfc.action.NDEF_DISCOVERED"/>-->
-        <!--<action android:name="android.intent.category.DEFAULT"/>-->
-        <!--<data android:scheme="http"-->
-            <!--android:host="nearfoodcommunication.android.com"-->
-            <!--android:pathPrefix="/MainActivity.java" />-->
-    <!--</intent-filter>-->
-
 
     <application
         android:allowBackup="true"
@@ -23,35 +15,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-                <action android:name="android.intent.category.DEFAULT"/>
-                <data android:scheme="http"
-                    android:host="nearfoodcommunication.android.com"
-                    android:pathPrefix="/MainActivity.java" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.nearfoodcommunication.main.MainActivity"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <data android:scheme="http"
-                    android:host="nearfoodcommunication.com"
-                    android:pathPrefix="/MainActivity.java" />
-            </intent-filter>
 
-            <meta-data android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/tech_filter" />
         </activity>
 
-        <activity android:name=".DisplayMessageActivity" />
+        <activity android:name=".DisplayMessageActivity">
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!--<intent-filter>-->
+            <!--<action android:name="android.nfc.action.NDEF_DISCOVERED"/>-->
+            <!--<category android:name="android.intent.category.DEFAULT"/>-->
+            <!--<data android:mimeType="text/plain" />-->
+            <!--</intent-filter>-->
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/com.nearfoodcommunication" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/tech_filter" />
+        </activity>
 
         <activity android:name="com.nearfoodcommunication.register.SignUpActivity" />
 

@@ -50,9 +50,14 @@
             <meta-data android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/tech_filter" />
         </activity>
+
         <activity android:name=".DisplayMessageActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".MenuActivity" />
+
+        <activity android:name="com.nearfoodcommunication.register.SignUpActivity" />
+
+        <activity android:name="com.nearfoodcommunication.menu.MenuActivity" />
+
+        <activity android:name="com.nearfoodcommunication.menu.MenuInMenuActivity" />
     </application>
 
 </manifest>

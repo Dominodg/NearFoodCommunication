@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nearfoodcommunication.register.SignUpActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 

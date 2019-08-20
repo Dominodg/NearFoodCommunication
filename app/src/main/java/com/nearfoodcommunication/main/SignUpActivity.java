@@ -1,5 +1,6 @@
 package com.nearfoodcommunication.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,18 +37,28 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 verfPassword(password.getText().toString(), confirmPassword.getText().toString());
+
             }
         });
 
 
-    }
+        }
 
     private void verfPassword(String password1, String password2)
     {
-        if(password1.equals(password2))
-            info.setText("You sign up succesfully.");
+        if(email.getText().length() == 0|| firstName.getText().length() == 0|| secondName.getText().length() == 0 || phoneNumber.getText().length() == 0 || password.getText().length() == 0 || confirmPassword.getText().length() == 0)
+        {
+            info.setText("Please fill all text boxes");
+        }
         else
+        if(!password1.equals(password2)) {
             info.setText("The passwords aren't the same.");
+        }
+        else {
+            info.setText("You sign up succesfully.");
+            Intent intent = new Intent(this, DisplayMessageActivity.class);
+            startActivity(intent);
+        }
 
     }
 }

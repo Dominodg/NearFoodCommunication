@@ -4,8 +4,13 @@ package com.nearfoodcommunication.menu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -13,6 +18,8 @@ import com.nearfoodcommunication.main.R;
 import com.nearfoodcommunication.menu.adapter.FoodTypeListAdapter;
 import com.nearfoodcommunication.menu.model.Food;
 import com.nearfoodcommunication.menu.model.FoodType;
+import com.nearfoodcommunication.order.AddToCartActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,36 +27,47 @@ import java.util.List;
 public class MenuActivity extends AppCompatActivity {
 
     ListView foodtypesList;
+    ImageView ivRestaurant;
+    TextView tvRestaurantName;
+    Toolbar toolBar;
+    String url="https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        toolBar = findViewById (R.id.toolbar);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setTitle("");
+
+        ivRestaurant =(ImageView) findViewById(R.id.ImageView);
+        Picasso.with(this).load(url).into(ivRestaurant);
+        tvRestaurantName = findViewById(R.id.tvRestaurantName);
+        tvRestaurantName.setText("nume");
+
         foodtypesList = findViewById(R.id.listFoodTypes);
 
         List<Food> pizzaList = new ArrayList<>();
-        Food pizza1 = new Food(R.drawable.pizza, "pizza", "e buna", "12");
+        Food pizza1 = new Food("pizza", 12346L, "e buna", 10.0, "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/dc23cd051d2249a5903d25faf8eeee4c/BFV36537_CC2017_2IngredintDough4Ways-FB.jpg");
+        Food pizza2 = new Food("pizza", 12312L, "e buna2", 10.0, "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/dc23cd051d2249a5903d25faf8eeee4c/BFV36537_CC2017_2IngredintDough4Ways-FB.jpg");
         pizzaList.add(pizza1);
-        List<Food> drinksList = new ArrayList<>();
-        Food drinks1 = new Food(R.drawable.drinks, "drinks", "e si mai buna", "34");
-        drinksList.add(drinks1);
+        pizzaList.add(pizza2);
+        List<Food> drinksList1 = new ArrayList<>();
+        Food drinks11 = new Food("drinks", 131L, "e si mai buna", 5.0,"https://www.medicalnewstoday.com/content//images/articles/320/320669/whiskey-glass.jpg");
+        drinksList1.add(drinks11);
+        List<Food> drinksList2 = new ArrayList<>();
+        Food drinks22 = new Food("drinks", 1331L, "e si mai buna", 5.0,"https://www.medicalnewstoday.com/content//images/articles/320/320669/whiskey-glass.jpg");
+        drinksList2.add(drinks22);
 
-        FoodType pizza = new FoodType(R.drawable.pizza, "pizza", "1", pizzaList);
-        FoodType drinks = new FoodType(R.drawable.drinks, "drinks", "2", drinksList);
-        FoodType drinks2 = new FoodType(R.drawable.drinks, "drinks", "3", drinksList);
-        FoodType drinks3 = new FoodType(R.drawable.drinks, "drinks", "4", drinksList);
-        FoodType drinks4 = new FoodType(R.drawable.drinks, "drinks", "5", drinksList);
-        FoodType drinks5 = new FoodType(R.drawable.drinks, "drinks", "6", drinksList);
-        FoodType drinks6 = new FoodType(R.drawable.drinks, "drinks", "7", drinksList);
+        FoodType pizza = new FoodType("https://img.buzzfeed.com/thumbnailer-prod-us-east-1/dc23cd051d2249a5903d25faf8eeee4c/BFV36537_CC2017_2IngredintDough4Ways-FB.jpg", "pizza", 2134L, pizzaList);
+        FoodType drinks1 = new FoodType("https://www.medicalnewstoday.com/content//images/articles/320/320669/whiskey-glass.jpg", "drinks1", 34L, drinksList1);
+        FoodType drinks2 = new FoodType("https://www.medicalnewstoday.com/content//images/articles/320/320669/whiskey-glass.jpg", "drinks2", 344L, drinksList2);
         List<FoodType> foodTypeList = new ArrayList<>();
         foodTypeList.add(pizza);
-        foodTypeList.add(drinks);
+        foodTypeList.add(drinks1);
         foodTypeList.add(drinks2);
-        foodTypeList.add(drinks3);
-        foodTypeList.add(drinks4);
-        foodTypeList.add(drinks5);
-        foodTypeList.add(drinks6);
+
 
         FoodTypeListAdapter adapter = new FoodTypeListAdapter(this, R.layout.menu_layout, foodTypeList);
         foodtypesList.setAdapter(adapter);
@@ -65,6 +83,25 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public  boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main,menu);
+
+        return true;
+    }
+
+    @Override
+    public  boolean onOptionsItemSelected(MenuItem item){
+        int res_id = item.getItemId();
+        if(res_id==R.id.cart)
+        {
+            Intent intent = new Intent(MenuActivity.this, AddToCartActivity.class);
+            startActivity(intent);
+        }
+        return true;
     }
 
 }

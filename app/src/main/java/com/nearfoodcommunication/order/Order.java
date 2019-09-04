@@ -1,22 +1,13 @@
-package com.nearfoodcommunication.menu.model;
+package com.nearfoodcommunication.order;
 
-import java.io.Serializable;
-
-public class Food implements Serializable {
-
+public class Order {
     private String foodName;
     private Long foodId;
     private String foodDescription;
     private Double foodPrice;
     private String foodPicture;
+    private Integer foodQuantity;
 
-    public Food(String foodName, Long foodId, String foodDescription, Double foodPrice, String foodPicture) {
-        this.foodName = foodName;
-        this.foodId = foodId;
-        this.foodDescription = foodDescription;
-        this.foodPrice = foodPrice;
-        this.foodPicture = foodPicture;
-    }
 
     public String getFoodName() {
         return foodName;
@@ -56,5 +47,13 @@ public class Food implements Serializable {
 
     public void setFoodPicture(String foodPicture) {
         this.foodPicture = foodPicture;
+    }
+
+    public Integer getFoodQuantity() {
+        return foodQuantity;
+    }
+
+    public void setFoodQuantity(Integer foodQuantity) {
+        this.foodQuantity = foodQuantity;
     }
 }

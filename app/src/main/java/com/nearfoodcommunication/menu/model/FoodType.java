@@ -4,48 +4,48 @@ import java.io.Serializable;
 import java.util.List;
 
 public class FoodType implements Serializable {
-    private Integer imgid;
-    private String foodname;
-    private String foodid;
-    private List<Food> fooditems;
+    private String foodPicture;
+    private String foodName;
+    private long foodId;
+    private List<Food> foodItems;
 
 
-    public FoodType(Integer imgid, String foodname, String foodid, List<Food> fooditems) {
-        this.imgid = imgid;
-        this.foodname = foodname;
-        this.foodid = foodid;
-        this.fooditems = fooditems;
+    public FoodType(String foodPicture, String foodName, long foodId, List<Food> foodItems) {
+        this.foodPicture = foodPicture;
+        this.foodName = foodName;
+        this.foodId = foodId;
+        this.foodItems = foodItems;
     }
 
-    public Integer getImgid() {
-        return imgid;
+    public String getFoodPicture() {
+        return foodPicture;
     }
 
-    public void setImgid(Integer imgid) {
-        this.imgid = imgid;
+    public void setFoodPicture(String foodPicture) {
+        this.foodPicture = foodPicture;
     }
 
-    public String getFoodname() {
-        return foodname;
+    public String getFoodName() {
+        return foodName;
     }
 
-    public void setFoodname(String foodname) {
-        this.foodname = foodname;
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
     }
 
-    public String getFoodid() {
-        return foodid;
+    public long getFoodId() {
+        return foodId;
     }
 
-    public void setFoodid(String foodid) {
-        this.foodid = foodid;
+    public void setFoodId(long foodId) {
+        this.foodId = foodId;
     }
 
-    public List<Food> getFooditems() {
-        return fooditems;
+    public List<Food> getFoodItems() {
+        return foodItems;
     }
 
-    public void setFooditems(List<Food> fooditems) {
-        this.fooditems = fooditems;
+    public void setFoodItems(List<Food> foodItems) {
+        this.foodItems = foodItems;
     }
 }

@@ -1,3 +1,5 @@
+//mlc
+
 package com.nearfoodcommunication.main;
 
 import android.content.Intent;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nearfoodcommunication.database.Database;
 import com.nearfoodcommunication.register.SignUpActivity;
 
 
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         login = (Button)findViewById(R.id.btnLogin);
         signup = (Button)findViewById(R.id.btnSignupSU);
 
+        cleanDB();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     NfcAdapter mNfcAdapter;
 
@@ -85,5 +92,10 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
         startActivity(intent);
+    }
+
+    private void cleanDB(){
+        Database db=new Database(this);
+        db.cleanCart();
     }
 }

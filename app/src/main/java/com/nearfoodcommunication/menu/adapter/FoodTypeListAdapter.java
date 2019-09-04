@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.nearfoodcommunication.main.R;
 import com.nearfoodcommunication.menu.model.Food;
 import com.nearfoodcommunication.menu.model.FoodType;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -28,10 +29,10 @@ public class FoodTypeListAdapter extends ArrayAdapter<FoodType> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Integer imgid = getItem(position).getImgid();
-        String foodname = getItem(position).getFoodname();
-        String foodid = getItem(position).getFoodid();
-        List<Food> fooditems = getItem(position).getFooditems();
+        String imgid = getItem(position).getFoodPicture();
+        String foodname = getItem(position).getFoodName();
+        long foodid = getItem(position).getFoodId();
+        List<Food> fooditems = getItem(position).getFoodItems();
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
@@ -39,7 +40,7 @@ public class FoodTypeListAdapter extends ArrayAdapter<FoodType> {
         ImageView ivImgid = (ImageView) convertView.findViewById(R.id.ImageView);
         TextView tvFoodname = (TextView) convertView.findViewById(R.id.TextView);
 
-        ivImgid.setImageResource(imgid);
+        Picasso.with(mContext).load(imgid).into(ivImgid);
         tvFoodname.setText(foodname);
 
         return convertView;

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nearfoodcommunication.main">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -53,6 +54,10 @@
         <activity android:name="com.nearfoodcommunication.register.SignUpActivity" />
         <activity android:name="com.nearfoodcommunication.menu.MenuActivity" />
         <activity android:name="com.nearfoodcommunication.menu.MenuInMenuActivity" />
+
+        <activity android:name="com.nearfoodcommunication.order.AddToCartActivity" />
+
+        <activity android:name="com.nearfoodcommunication.order.OrderPlacedActivity" />
     </application>
 
 </manifest>

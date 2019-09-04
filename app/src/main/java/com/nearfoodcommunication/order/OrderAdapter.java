@@ -1,45 +1,51 @@
-package com.nearfoodcommunication.menu.adapter;
+package com.nearfoodcommunication.order;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nearfoodcommunication.database.Database;
+import com.nearfoodcommunication.main.MainActivity;
 import com.nearfoodcommunication.main.R;
-import com.nearfoodcommunication.menu.model.Food;
 import com.nearfoodcommunication.order.Order;
+import com.nearfoodcommunication.register.SignUpActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class FoodListAdapter extends ArrayAdapter<Food> {
+public class OrderAdapter extends ArrayAdapter<Order> {
     int mResource;
     private Context mContext;
     Database db;
-    Integer foodquantity;
+    Integer price;
 
-    public FoodListAdapter(Context context, int resource, List<Food> objects) {
+    public OrderAdapter(Context context, int resource, List<Order> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
+
     }
+
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
 
-        final String foodpicture = getItem(position).getFoodPicture();
         final String foodname = getItem(position).getFoodName();
         final String fooddescription = getItem(position).getFoodDescription();
         final Double foodprice = getItem(position).getFoodPrice();
         final Long foodid = getItem(position).getFoodId();
+        final String foodpicture = getItem(position).getFoodPicture();
+        final Integer foodquantity = getItem(position).getFoodQuantity();
 
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -47,47 +53,37 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
 
         ImageView ivImgid = convertView.findViewById(R.id.ImageView);
         TextView tvFoodname = convertView.findViewById(R.id.nume);
-        TextView tvFooddescription = convertView.findViewById(R.id.descriere);
         TextView tvFoodprice = convertView.findViewById(R.id.pret);
-        Button addtocart = convertView.findViewById(R.id.addtocart);
+        TextView tvFooddescription = convertView.findViewById(R.id.descriere);
+        TextView tvFoodquantity =convertView.findViewById(R.id.tvQuantity);
+        Button remove = convertView.findViewById(R.id.remove);
 
-        Picasso.with(mContext).load(foodpicture).into(ivImgid);
+
         tvFoodname.setText(foodname);
         tvFooddescription.setText(fooddescription);
         tvFoodprice.setText(foodprice.toString());
+        tvFoodquantity.setText(foodquantity.toString());
+        Picasso.with(mContext).load(foodpicture).into(ivImgid);
 
-
-        addtocart.setOnClickListener(new View.OnClickListener() {
+        remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                clear();
                 db = new Database(mContext);
 
                 Order order = new Order();
-                order.setFoodName(foodname);
                 order.setFoodId(foodid);
-                order.setFoodDescription(fooddescription);
-                order.setFoodPrice(foodprice);
-                order.setFoodPicture(foodpicture);
-                order.setFoodQuantity(foodquantity);
+                db.removeCart(order);
 
+                addAll(db.getCarts());
+                notifyDataSetChanged();
 
-
-                if(db.checkExistenceCart(order)==true) {
-                    foodquantity=foodquantity+1;
-                    db.removeCart(order);
-                    order.setFoodQuantity(foodquantity);
-                    db.addToCart(order);
-                }else{
-                    foodquantity=1;
-                    order.setFoodQuantity(foodquantity);
-                    db.addToCart(order);
-                }
             }
 
         });
 
 
-
         return convertView;
     }
+
 }

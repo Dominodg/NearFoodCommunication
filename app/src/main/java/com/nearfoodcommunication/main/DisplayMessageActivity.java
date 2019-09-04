@@ -25,7 +25,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     Context context;
     IntentFilter writeTagFilters[];
-    private Button button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
         writeTagFilters = new IntentFilter[] { tagDetected };
-        button = (Button)findViewById(R.id.search_button);
 
     }
 

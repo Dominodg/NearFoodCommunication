@@ -46,20 +46,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         writeTagFilters = new IntentFilter[] { tagDetected };
         button = (Button)findViewById(R.id.search_button);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enterMenu();
-            }
-        });
-
     }
 
-    private void enterMenu()
-    {
-        Intent intent = new Intent(DisplayMessageActivity.this, MenuActivity.class);
-        startActivity(intent);
-    }
 
     /*@Override
     protected void onNewIntent(Intent intent) {
@@ -92,17 +80,23 @@ public class DisplayMessageActivity extends AppCompatActivity {
 //        String tagId = new String(msgs[0].getRecords()[0].getType());
         byte[] payload = msgs[0].getRecords()[0].getPayload();
         String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16"; // Get the Text Encoding
-        int languageCodeLength = payload[0] & 0063; // Get the Language Code, e.g. "en"
+//        int languageCodeLength = payload[0] & 0063; // Get the Language Code, e.g. "en"
         // String languageCode = new String(payload, 1, languageCodeLength, "US-ASCII");
 
         try {
             // Get the Text
-            text = new String(payload, languageCodeLength, payload.length - languageCodeLength, textEncoding);
+            text = new String(payload, 0, payload.length, textEncoding);
         } catch (UnsupportedEncodingException e) {
             Log.e("UnsupportedEncoding", e.toString());
         }
 
         Toast.makeText(context, "Welcome to " + text, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(DisplayMessageActivity.this, MenuActivity.class);
+        intent.putExtra("rest", text);
+        startActivity(intent);
+
+
 
         ///tvNFCContent.setText("NFC Content: " + text);
     }

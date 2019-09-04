@@ -3,4 +3,5 @@
     <string name="login_data">Enter your email</string>
     <string name="button_login">Login</string>
     <string name="login_data_pass">Password</string>
+    <string name="title_activity_beam_message">BeamMessage</string>
 </resources>

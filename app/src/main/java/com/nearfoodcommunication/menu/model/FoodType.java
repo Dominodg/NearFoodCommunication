@@ -7,13 +7,15 @@ public class FoodType implements Serializable {
     private String foodPicture;
     private String foodName;
     private long foodId;
+    private Integer idProperty;
     private List<Food> foodItems;
 
 
-    public FoodType(String foodPicture, String foodName, long foodId, List<Food> foodItems) {
-        this.foodPicture = foodPicture;
-        this.foodName = foodName;
+    public FoodType(long foodId, String foodName, String foodPicture, Integer idProperty, List<Food> foodItems) {
         this.foodId = foodId;
+        this.foodName = foodName;
+        this.foodPicture = foodPicture;
+        this.idProperty = idProperty;
         this.foodItems = foodItems;
     }
 
@@ -47,5 +49,13 @@ public class FoodType implements Serializable {
 
     public void setFoodItems(List<Food> foodItems) {
         this.foodItems = foodItems;
+    }
+
+    public Integer getIdProperty() {
+        return idProperty;
+    }
+
+    public void setIdProperty(Integer idProperty) {
+        this.idProperty = idProperty;
     }
 }

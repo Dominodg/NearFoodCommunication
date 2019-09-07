@@ -31,8 +31,6 @@ public class FoodTypeListAdapter extends ArrayAdapter<FoodType> {
     public View getView(int position, View convertView, ViewGroup parent) {
         String imgid = getItem(position).getFoodPicture();
         String foodname = getItem(position).getFoodName();
-        long foodid = getItem(position).getFoodId();
-        List<Food> fooditems = getItem(position).getFoodItems();
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);

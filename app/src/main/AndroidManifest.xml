@@ -58,6 +58,11 @@
         <activity android:name="com.nearfoodcommunication.order.AddToCartActivity" />
 
         <activity android:name="com.nearfoodcommunication.order.OrderPlacedActivity" />
+
+        <activity android:name="com.nearfoodcommunication.register.LoginActivity" />
+
+        <activity android:name="com.nearfoodcommunication.register.AccountManagementActivity" />
+
     </application>
 
 </manifest>

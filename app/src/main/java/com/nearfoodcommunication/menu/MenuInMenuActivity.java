@@ -12,14 +12,18 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.nearfoodcommunication.main.DisplayMessageActivity;
 import com.nearfoodcommunication.main.R;
 import com.nearfoodcommunication.menu.adapter.FoodListAdapter;
 import com.nearfoodcommunication.menu.model.Food;
 import com.nearfoodcommunication.menu.model.FoodType;
 import com.nearfoodcommunication.order.AddToCartActivity;
+import com.nearfoodcommunication.register.AccountManagementActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.nearfoodcommunication.register.SaveSharedPreference.clearUserName;
 
 
 public class MenuInMenuActivity extends AppCompatActivity {
@@ -87,6 +91,10 @@ public class MenuInMenuActivity extends AppCompatActivity {
         if(res_id==R.id.cart)
         {
             Intent intent = new Intent(MenuInMenuActivity.this, AddToCartActivity.class);
+            startActivity(intent);
+        }
+        else if(res_id==R.id.account){
+            Intent intent = new Intent(MenuInMenuActivity.this, AccountManagementActivity.class);
             startActivity(intent);
         }
         return true;

@@ -6,29 +6,19 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
-import android.nfc.Tag;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
-import java.io.UnsupportedEncodingException;
 
 import com.nearfoodcommunication.menu.MenuActivity;
-import com.nearfoodcommunication.order.AddToCartActivity;
-import com.nearfoodcommunication.register.AccountManagementActivity;
 
-import static com.nearfoodcommunication.register.SaveSharedPreference.clearUserName;
+import java.io.UnsupportedEncodingException;
+
 
 public class DisplayMessageActivity extends AppCompatActivity {
 
-    Toolbar toolBar;
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     Context context;
@@ -39,9 +29,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
-        toolBar = findViewById (R.id.toolbar);
-        setSupportActionBar(toolBar);
-        getSupportActionBar().setTitle("");
 
         context = this;
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -55,7 +42,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
-        writeTagFilters = new IntentFilter[] { tagDetected };
+        writeTagFilters = new IntentFilter[]{tagDetected};
 
 
     }
@@ -85,6 +72,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             buildTagViews(msgs);
         }
     }
+
     private void buildTagViews(NdefMessage[] msgs) {
         if (msgs == null || msgs.length == 0) return;
 
@@ -109,31 +97,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         startActivity(intent);
 
 
-
         ///tvNFCContent.setText("NFC Content: " + text);
-    }
-
-    @Override
-    public  boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main,menu);
-
-        return true;
-    }
-
-    @Override
-    public  boolean onOptionsItemSelected(MenuItem item){
-        int res_id = item.getItemId();
-        if(res_id==R.id.cart)
-        {
-            Intent intent = new Intent(DisplayMessageActivity.this, AddToCartActivity.class);
-            startActivity(intent);
-        }
-        else if(res_id==R.id.account){
-            Intent intent = new Intent(DisplayMessageActivity.this, AccountManagementActivity.class);
-            startActivity(intent);
-        }
-        return true;
     }
 
 

@@ -22,12 +22,12 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
     int mResource;
     private Context mContext;
     Database db;
-    Integer foodquantity;
 
     public FoodListAdapter(Context context, int resource, List<Food> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
+        db = new Database(mContext);
     }
 
     @NonNull
@@ -39,7 +39,7 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
         final String foodname = getItem(position).getFoodName();
         final String fooddescription = getItem(position).getFoodDescription();
         final Double foodprice = getItem(position).getFoodPrice();
-        final Long foodid = getItem(position).getFoodId();
+        final Long foodId = getItem(position).getFoodId();
 
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -60,33 +60,29 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
         addtocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db = new Database(mContext);
 
-                Order order = new Order();
-                order.setFoodName(foodname);
-                order.setFoodId(foodid);
-                order.setFoodDescription(fooddescription);
-                order.setFoodPrice(foodprice);
-                order.setFoodPicture(foodpicture);
-                order.setFoodQuantity(foodquantity);
+                Order existingOrder = db.getOrderByFoodId(foodId);
 
+                if (existingOrder != null) {
+                    db.removeOrderFromCart(existingOrder.getFoodId());
 
+                    existingOrder.setFoodQuantity(existingOrder.getFoodQuantity() + 1);
 
-                if(db.checkExistenceCart(order)==true) {
-                    foodquantity=foodquantity+1;
-                    db.removeCart(order);
-                    order.setFoodQuantity(foodquantity);
-                    db.addToCart(order);
-                }else{
-                    foodquantity=1;
-                    order.setFoodQuantity(foodquantity);
+                    db.addToCart(existingOrder);
+                } else {
+
+                    Order order = new Order();
+                    order.setFoodName(foodname);
+                    order.setFoodId(foodId);
+                    order.setFoodDescription(fooddescription);
+                    order.setFoodPrice(foodprice);
+                    order.setFoodPicture(foodpicture);
+                    order.setFoodQuantity(1);
+
                     db.addToCart(order);
                 }
             }
-
         });
-
-
 
         return convertView;
     }

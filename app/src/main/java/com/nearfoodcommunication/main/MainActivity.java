@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.nearfoodcommunication.database.Database;
 import com.nearfoodcommunication.register.LoginActivity;
 import com.nearfoodcommunication.register.SaveSharedPreference;
 
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         turnOnNfcBeam();
-        cleanDB();
 
         finish();
 
@@ -59,12 +57,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "NFC is not available. Try the QR code instead.", Toast.LENGTH_LONG);
         }
 
-    }
-
-
-    private void cleanDB(){
-        Database db=new Database(this);
-        db.cleanCart();
     }
 
 }

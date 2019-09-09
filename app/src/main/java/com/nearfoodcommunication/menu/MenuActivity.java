@@ -40,8 +40,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.nearfoodcommunication.register.SaveSharedPreference.clearUserName;
-
 public class MenuActivity extends AppCompatActivity{
 
     ListView foodtypesList;
@@ -77,7 +75,7 @@ public class MenuActivity extends AppCompatActivity{
 
                         Toast.makeText(MenuActivity.this, "OK", Toast.LENGTH_LONG).show();
 //                        Toast.makeText(MenuActivity.this, response.toString(), Toast.LENGTH_LONG).show();
-                        parseData(response, foodTypesList);
+//                        parseData(response, foodTypesList);
 
                         setContentView(R.layout.activity_menu);
 

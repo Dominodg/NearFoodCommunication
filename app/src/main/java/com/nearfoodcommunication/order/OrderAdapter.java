@@ -25,13 +25,12 @@ public class OrderAdapter extends ArrayAdapter<Order> {
     int mResource;
     private Context mContext;
     Database db;
-    Integer price;
 
     public OrderAdapter(Context context, int resource, List<Order> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
-
+        db = new Database(mContext);
     }
 
 
@@ -55,7 +54,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         TextView tvFoodname = convertView.findViewById(R.id.nume);
         TextView tvFoodprice = convertView.findViewById(R.id.pret);
         TextView tvFooddescription = convertView.findViewById(R.id.descriere);
-        TextView tvFoodquantity =convertView.findViewById(R.id.tvQuantity);
+        TextView tvFoodquantity = convertView.findViewById(R.id.tvQuantity);
         Button remove = convertView.findViewById(R.id.remove);
 
 
@@ -69,19 +68,13 @@ public class OrderAdapter extends ArrayAdapter<Order> {
             @Override
             public void onClick(View view) {
                 clear();
-                db = new Database(mContext);
 
-                Order order = new Order();
-                order.setFoodId(foodid);
-                db.removeCart(order);
+                db.removeOrderFromCart(foodid);
 
                 addAll(db.getCarts());
                 notifyDataSetChanged();
-
             }
-
         });
-
 
         return convertView;
     }

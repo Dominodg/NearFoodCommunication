@@ -11,12 +11,12 @@
     tools:context=".DisplayMessageActivity"
     tools:ignore="ExtraText">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ff6666"
-        tools:ignore="MissingConstraints"></android.support.v7.widget.Toolbar>
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#ff6666"-->
+        <!--tools:ignore="MissingConstraints"></android.support.v7.widget.Toolbar>-->
 
     <TextView
         android:id="@+id/editText"

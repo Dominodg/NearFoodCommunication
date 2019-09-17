@@ -3,9 +3,7 @@ package com.nearfoodcommunication.menu;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -24,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.nearfoodcommunication.main.DisplayMessageActivity;
 import com.nearfoodcommunication.main.R;
 import com.nearfoodcommunication.menu.adapter.FoodTypeListAdapter;
 import com.nearfoodcommunication.menu.model.Food;

@@ -1,32 +1,27 @@
 package com.nearfoodcommunication.order;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nearfoodcommunication.database.Database;
-import com.nearfoodcommunication.main.MainActivity;
 import com.nearfoodcommunication.main.R;
-import com.nearfoodcommunication.order.Order;
-import com.nearfoodcommunication.register.SignUpActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class OrderAdapter extends ArrayAdapter<Order> {
+public class OrderAdapter extends ArrayAdapter<OrderLine> {
     int mResource;
     private Context mContext;
     Database db;
 
-    public OrderAdapter(Context context, int resource, List<Order> objects) {
+    public OrderAdapter(Context context, int resource, List<OrderLine> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;

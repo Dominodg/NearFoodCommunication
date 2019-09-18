@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.nearfoodcommunication.database.Database;
 import com.nearfoodcommunication.main.R;
 import com.nearfoodcommunication.menu.model.Food;
-import com.nearfoodcommunication.order.Order;
+import com.nearfoodcommunication.order.OrderLine;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -61,25 +61,25 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
             @Override
             public void onClick(View view) {
 
-                Order existingOrder = db.getOrderByFoodId(foodId);
+                OrderLine existingOrderLine = db.getOrderByFoodId(foodId);
 
-                if (existingOrder != null) {
-                    db.removeOrderFromCart(existingOrder.getFoodId());
+                if (existingOrderLine != null) {
+                    db.removeOrderFromCart(existingOrderLine.getFoodId());
 
-                    existingOrder.setFoodQuantity(existingOrder.getFoodQuantity() + 1);
+                    existingOrderLine.setFoodQuantity(existingOrderLine.getFoodQuantity() + 1);
 
-                    db.addToCart(existingOrder);
+                    db.addToCart(existingOrderLine);
                 } else {
 
-                    Order order = new Order();
-                    order.setFoodName(foodname);
-                    order.setFoodId(foodId);
-                    order.setFoodDescription(fooddescription);
-                    order.setFoodPrice(foodprice);
-                    order.setFoodPicture(foodpicture);
-                    order.setFoodQuantity(1);
+                    OrderLine orderLine = new OrderLine();
+                    orderLine.setFoodName(foodname);
+                    orderLine.setFoodId(foodId);
+                    orderLine.setFoodDescription(fooddescription);
+                    orderLine.setFoodPrice(foodprice);
+                    orderLine.setFoodPicture(foodpicture);
+                    orderLine.setFoodQuantity(1);
 
-                    db.addToCart(order);
+                    db.addToCart(orderLine);
                 }
             }
         });

@@ -1,59 +1,39 @@
 package com.nearfoodcommunication.order;
 
+import java.util.List;
+
 public class Order {
-    private String foodName;
-    private Long foodId;
-    private String foodDescription;
-    private Double foodPrice;
-    private String foodPicture;
-    private Integer foodQuantity;
+    private Integer tableNumber;
+    private Long propertyId;
+    private List<OrderLine> orderLine;
 
-
-    public String getFoodName() {
-        return foodName;
+    public Order(Integer tableNumber, Long propertyId, List<OrderLine> orderLine) {
+        this.tableNumber = tableNumber;
+        this.propertyId = propertyId;
+        this.orderLine = orderLine;
     }
 
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
+    public Integer getTableNumber() {
+        return tableNumber;
     }
 
-    public Long getFoodId() {
-        return foodId;
+    public void setTableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
     }
 
-    public void setFoodId(Long foodId) {
-        this.foodId = foodId;
+    public Long getPropertyId() {
+        return propertyId;
     }
 
-    public String getFoodDescription() {
-        return foodDescription;
+    public void setPropertyId(Long propertyId) {
+        this.propertyId = propertyId;
     }
 
-    public void setFoodDescription(String foodDescription) {
-        this.foodDescription = foodDescription;
+    public List<OrderLine> getOrderLine() {
+        return orderLine;
     }
 
-    public Double getFoodPrice() {
-        return foodPrice;
-    }
-
-    public void setFoodPrice(Double foodPrice) {
-        this.foodPrice = foodPrice;
-    }
-
-    public String getFoodPicture() {
-        return foodPicture;
-    }
-
-    public void setFoodPicture(String foodPicture) {
-        this.foodPicture = foodPicture;
-    }
-
-    public Integer getFoodQuantity() {
-        return foodQuantity;
-    }
-
-    public void setFoodQuantity(Integer foodQuantity) {
-        this.foodQuantity = foodQuantity;
+    public void setOrderLine(List<OrderLine> orderLine) {
+        this.orderLine = orderLine;
     }
 }

@@ -11,6 +11,11 @@ import com.nearfoodcommunication.database.Database;
 import com.nearfoodcommunication.main.DisplayMessageActivity;
 import com.nearfoodcommunication.main.R;
 import com.nearfoodcommunication.menu.MenuActivity;
+import com.nearfoodcommunication.register.NfcRouterActivity;
+
+import java.util.List;
+
+import static com.nearfoodcommunication.register.SaveSharedPreference.getPropertyId;
 
 
 public class OrderPlacedActivity extends AppCompatActivity {
@@ -18,6 +23,8 @@ public class OrderPlacedActivity extends AppCompatActivity {
     Context context;
     Button btn1;
     Button btn2;
+    Database db;
+    List<OrderLine> foodList;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,35 +33,45 @@ public class OrderPlacedActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_order_placed);
 
-        btn1=findViewById(R.id.btn1);
-        btn2=findViewById(R.id.btn2);
+        db = new Database(context);
 
-        Database db = new Database(context);
-        db.cleanCart();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            int tableNumber = bundle.getInt(NfcRouterActivity.NFC_PARAM_TABLE_NUMBER);
 
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            foodList = db.getCarts();
 
-                Intent intent = new Intent(OrderPlacedActivity.this, MenuActivity.class);
-                startActivity(intent);
-            }
-        });
+            Order order = new Order(tableNumber, getPropertyId(OrderPlacedActivity.this), foodList);
 
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            btn1 = findViewById(R.id.btn1);
+            btn2 = findViewById(R.id.btn2);
 
-                Intent intent = new Intent(OrderPlacedActivity.this, DisplayMessageActivity.class);
-                startActivity(intent);
-            }
-        });
+            db.cleanCart();
 
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(OrderPlacedActivity.this, MenuActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(OrderPlacedActivity.this, DisplayMessageActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);
+        finish();
     }
 }

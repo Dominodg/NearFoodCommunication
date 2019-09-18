@@ -13,7 +13,9 @@ import com.nearfoodcommunication.main.R;
 
 import java.util.List;
 
-public class AddToCartActivity extends AppCompatActivity  {
+import static com.nearfoodcommunication.register.SaveSharedPreference.getPropertyId;
+
+public class AddToCartActivity extends AppCompatActivity {
 
     ListView foodListView;
     Button btnBuy;
@@ -22,7 +24,7 @@ public class AddToCartActivity extends AppCompatActivity  {
     Double price;
     int i;
     Handler handler;
-    List<Order> foodList;
+    List<OrderLine> foodList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,8 @@ public class AddToCartActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_add_to_cart);
         foodListView = findViewById(R.id.foodlist);
 
-        foodList = db.getCarts();
+        foodList=db.getCarts();
+
 
         OrderAdapter adapter = new OrderAdapter(this, R.layout.add_to_cart_layout, foodList);
         foodListView.setAdapter(adapter);
@@ -49,8 +52,8 @@ public class AddToCartActivity extends AppCompatActivity  {
         }
 
         finalPrice = findViewById(R.id.finalPrice);
-        handler=new Handler();
-        handler.post(new Runnable(){
+        handler = new Handler();
+        handler.post(new Runnable() {
             @Override
             public void run() {
                 price = 0.0;
@@ -60,7 +63,7 @@ public class AddToCartActivity extends AppCompatActivity  {
                     price = price + a * b;
                 }
                 finalPrice.setText("Preț: " + price.toString());
-                handler.postDelayed(this,100); // set time here to refresh textView
+                handler.postDelayed(this, 100); // set time here to refresh textView
             }
         });
 

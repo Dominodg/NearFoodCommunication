@@ -5,8 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
-
-import com.nearfoodcommunication.order.Order;
+import com.nearfoodcommunication.order.OrderLine;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class Database extends SQLiteAssetHelper {
         super(context, DB_NAME, null, DB_VER);
     }
 
-    public List<Order> getCarts() {
+    public List<OrderLine> getCarts() {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
@@ -30,40 +29,40 @@ public class Database extends SQLiteAssetHelper {
         qb.setTables(sqlTable);
         Cursor c = qb.query(db, sqlSelect, null, null, null, null, null);
 
-        List<Order> result = new ArrayList<>();
+        List<OrderLine> result = new ArrayList<>();
         if (c.moveToFirst()) {
             do {
-                Order order = extractOrderFromCursor(c);
+                OrderLine orderLine = extractOrderFromCursor(c);
 
-                result.add(order);
+                result.add(orderLine);
             } while (c.moveToNext());
         }
 
         return result;
     }
 
-    private Order extractOrderFromCursor(Cursor c) {
+    private OrderLine extractOrderFromCursor(Cursor c) {
 
-        Order order = new Order();
-        order.setFoodName(c.getString(c.getColumnIndex("Name")));
-        order.setFoodId(c.getLong(c.getColumnIndex("Id")));
-        order.setFoodDescription(c.getString(c.getColumnIndex("Description")));
-        order.setFoodPrice(c.getDouble(c.getColumnIndex("Price")));
-        order.setFoodPicture(c.getString(c.getColumnIndex("Picture")));
-        order.setFoodQuantity(c.getInt(c.getColumnIndex("Quantity")));
+        OrderLine orderLine = new OrderLine();
+        orderLine.setFoodName(c.getString(c.getColumnIndex("Name")));
+        orderLine.setFoodId(c.getLong(c.getColumnIndex("Id")));
+        orderLine.setFoodDescription(c.getString(c.getColumnIndex("Description")));
+        orderLine.setFoodPrice(c.getDouble(c.getColumnIndex("Price")));
+        orderLine.setFoodPicture(c.getString(c.getColumnIndex("Picture")));
+        orderLine.setFoodQuantity(c.getInt(c.getColumnIndex("Quantity")));
 
-        return order;
+        return orderLine;
     }
 
-    public void addToCart(Order order) {
+    public void addToCart(OrderLine orderLine) {
         SQLiteDatabase db = getReadableDatabase();
         String query = String.format("INSERT INTO OrderDetail(Name,Id,Description,Price,Picture,Quantity) VALUES('%s','%s','%s','%s','%s','%s');",
-                order.getFoodName(),
-                order.getFoodId(),
-                order.getFoodDescription(),
-                order.getFoodPrice(),
-                order.getFoodPicture(),
-                order.getFoodQuantity());
+                orderLine.getFoodName(),
+                orderLine.getFoodId(),
+                orderLine.getFoodDescription(),
+                orderLine.getFoodPrice(),
+                orderLine.getFoodPicture(),
+                orderLine.getFoodQuantity());
         db.execSQL(query);
     }
 
@@ -79,7 +78,7 @@ public class Database extends SQLiteAssetHelper {
         db.execSQL(query);
     }
 
-    public Order getOrderByFoodId(Long foodId) {
+    public OrderLine getOrderByFoodId(Long foodId) {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
@@ -91,12 +90,12 @@ public class Database extends SQLiteAssetHelper {
 
         Cursor c = qb.query(db, sqlSelect, selection, null, null, null, null);
 
-        Order order = null;
+        OrderLine orderLine = null;
 
         if (c.moveToFirst()) {
-            order = extractOrderFromCursor(c);
+            orderLine = extractOrderFromCursor(c);
         }
-        return order;
+        return orderLine;
     }
 
 

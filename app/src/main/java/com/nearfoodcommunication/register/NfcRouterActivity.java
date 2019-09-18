@@ -89,16 +89,25 @@ public class NfcRouterActivity extends AppCompatActivity {
 
         if (nfcTagDataPieces.length == 1) {
             Intent intent = new Intent(NfcRouterActivity.this, MenuActivity.class);
-            intent.putExtra(NFC_PARAM_PROPERTYID, nfcTagDataPieces[0]);
+
+            int propertyId = Integer.parseInt(nfcTagDataPieces[0]);
+            intent.putExtra(NFC_PARAM_PROPERTYID, propertyId);
+
             startActivity(intent);
         } else {
             if (db.getCarts().size() > 0) {
                 Intent intent = new Intent(NfcRouterActivity.this, OrderPlacedActivity.class);
-                intent.putExtra(NFC_PARAM_TABLE_NUMBER, nfcTagDataPieces[1]);
+
+                int tableNumber = Integer.parseInt(nfcTagDataPieces[1]);
+                intent.putExtra(NFC_PARAM_TABLE_NUMBER, tableNumber);
+
                 startActivity(intent);
             } else {
                 Intent intent = new Intent(NfcRouterActivity.this, MenuActivity.class);
-                intent.putExtra(NFC_PARAM_PROPERTYID, nfcTagDataPieces[0]);
+
+                int propertyId = Integer.parseInt(nfcTagDataPieces[0]);
+                intent.putExtra(NFC_PARAM_PROPERTYID, propertyId);
+
                 startActivity(intent);
             }
         }

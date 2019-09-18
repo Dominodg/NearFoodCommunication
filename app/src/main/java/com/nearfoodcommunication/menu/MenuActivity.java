@@ -26,8 +26,10 @@ import com.nearfoodcommunication.main.R;
 import com.nearfoodcommunication.menu.adapter.FoodTypeListAdapter;
 import com.nearfoodcommunication.menu.model.Food;
 import com.nearfoodcommunication.menu.model.FoodType;
+import com.nearfoodcommunication.menu.model.Restaurant;
 import com.nearfoodcommunication.order.AddToCartActivity;
 import com.nearfoodcommunication.register.AccountManagementActivity;
+import com.nearfoodcommunication.register.NfcRouterActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -37,16 +39,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuActivity extends AppCompatActivity{
+import static com.nearfoodcommunication.register.SaveSharedPreference.setPropertyId;
 
-    ListView foodtypesList;
+public class MenuActivity extends AppCompatActivity {
+
+    private static final String MENU_BASE_URL = "http://ec2-3-15-158-123.us-east-2.compute.amazonaws.com:8080/food-categories/";
+
+    Context context = this;
+
+    ListView foodTypesListView;
+
     ImageView ivRestaurant;
     TextView tvRestaurantName;
     Toolbar toolBar;
-    List<FoodType> foodTypesList;
     String urlPicture;
 
-    Context context=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,105 +61,138 @@ public class MenuActivity extends AppCompatActivity{
         setContentView(R.layout.activity_loader);
 
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+
+            int propertyId = bundle.getInt(NfcRouterActivity.NFC_PARAM_PROPERTYID);
+
+            String url = MENU_BASE_URL + propertyId;
 
 
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                    new Response.Listener<JSONObject>() {
 
-   //    String url = "https://jsonplaceholder.typicode.com/photos";
-        String url = "https://jsonplaceholder.typicode.com/todos/1";
-        //String url = "https://localhost:8080/food-categories/3";
+                        @Override
+                        public void onResponse(JSONObject response) {
 
+                            Toast.makeText(MenuActivity.this, "OK", Toast.LENGTH_LONG).show();
+                            try {
+                                Restaurant restaurant = parseData(response);
 
+                                setContentView(R.layout.activity_menu);
 
+                                toolBar = findViewById(R.id.toolbar);
+                                setSupportActionBar(toolBar);
+                                getSupportActionBar().setTitle("");
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                                tvRestaurantName = findViewById(R.id.tvRestaurantName);
+                                tvRestaurantName.setText(restaurant.getPropertyName());
 
-                    @Override
-                    public void onResponse(JSONObject response) {
+                                ivRestaurant = (ImageView) findViewById(R.id.ImageView);
+                                Picasso.with(context).load(urlPicture).into(ivRestaurant);
 
-                        Toast.makeText(MenuActivity.this, "OK", Toast.LENGTH_LONG).show();
-//                        Toast.makeText(MenuActivity.this, response.toString(), Toast.LENGTH_LONG).show();
-//                        parseData(response, foodTypesList);
+                                setPropertyId(context, restaurant.getPropertyId());
 
-                        setContentView(R.layout.activity_menu);
+                                FoodTypeListAdapter adapter = new FoodTypeListAdapter(context, R.layout.menu_layout, restaurant.getFoodCategories());
+                                foodTypesListView = findViewById(R.id.listFoodTypes);
+                                foodTypesListView.setAdapter(adapter);
 
-                        toolBar = findViewById (R.id.toolbar);
-                        setSupportActionBar(toolBar);
-                        getSupportActionBar().setTitle("");
+                                foodTypesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                                        Intent intent = new Intent(MenuActivity.this, MenuInMenuActivity.class);
+                                        FoodType selectedItem = (FoodType) foodTypesListView.getItemAtPosition(position);
 
-                        ivRestaurant =(ImageView) findViewById(R.id.ImageView);
-                        tvRestaurantName = findViewById(R.id.tvRestaurantName);
-                        Picasso.with(context).load(urlPicture).into(ivRestaurant);
-                        tvRestaurantName.setText("nume");
-
-                        foodtypesList = findViewById(R.id.listFoodTypes);
-                        foodTypesList = new ArrayList<>();
-
-
-                        List<Food> pizzaList = new ArrayList<>();
-                        Food pizza1 = new Food(1L,"pizza", 10.0, "e buna", 100.0, "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/dc23cd051d2249a5903d25faf8eeee4c/BFV36537_CC2017_2IngredintDough4Ways-FB.jpg");
-                        Food pizza2 = new Food(2L,"pizza2", 10.0, "e buna2", 1640.0, "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/dc23cd051d2249a5903d25faf8eeee4c/BFV36537_CC2017_2IngredintDough4Ways-FB.jpg");
-                        pizzaList.add(pizza1);
-                        pizzaList.add(pizza2);
-                        List<Food> drinksList1 = new ArrayList<>();
-                        Food drinks11 = new Food(3L,"drinks", 5.0, "e si mai buna", 5.0,"https://www.medicalnewstoday.com/content//images/articles/320/320669/whiskey-glass.jpg");
-                        drinksList1.add(drinks11);
-                        FoodType pizza = new FoodType(4L,"pizza","https://img.buzzfeed.com/thumbnailer-prod-us-east-1/dc23cd051d2249a5903d25faf8eeee4c/BFV36537_CC2017_2IngredintDough4Ways-FB.jpg", 2134, pizzaList);
-                        FoodType drinks = new FoodType(5L,"drinks","https://www.medicalnewstoday.com/content//images/articles/320/320669/whiskey-glass.jpg", 346, drinksList1);
-                        foodTypesList.add(pizza);
-                        foodTypesList.add(drinks);
-
-
-                        FoodTypeListAdapter adapter = new FoodTypeListAdapter(context, R.layout.menu_layout, foodTypesList);
-                        foodtypesList.setAdapter(adapter);
-                        foodtypesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                                Intent intent = new Intent(MenuActivity.this, MenuInMenuActivity.class);
-                                FoodType selectedItem = (FoodType) foodtypesList.getItemAtPosition(position);
-
-                                intent.putExtra("FoodName", selectedItem);
-                                startActivity(intent);
+                                        intent.putExtra("FoodName", selectedItem);
+                                        startActivity(intent);
+                                    }
+                                });
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        });
+                        }
 
+                        private Restaurant parseData(JSONObject response) throws JSONException {
 
+                            JSONObject propertyInfo = response.getJSONObject("property");
 
-                    }
+                            String propertyName = propertyInfo.getString("propertyName");
+                            Long propertyId = propertyInfo.getLong("propertyId");
+                            String propertyAdress = propertyInfo.getString("propertyAdress");
+                            Integer noTables = propertyInfo.getInt("noTables");
 
-                }, new Response.ErrorListener() {
+                            Restaurant restaurant = new Restaurant();
+                            restaurant.setPropertyId(propertyId);
+                            restaurant.setPropertyName(propertyName);
+                            restaurant.setPropertyAdress(propertyAdress);
+                            restaurant.setNoTables(noTables);
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        Toast.makeText(MenuActivity.this, "NOT OK", Toast.LENGTH_LONG).show();
+                            List<FoodType> foodCategories = new ArrayList<>();
+                            JSONArray foodTypesArray = response.getJSONArray("foodCategories");
 
-                    }
-                });
+                            for (int i = 0; i < foodTypesArray.length(); i++) {
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest);
+                                JSONObject foodTypesObj = foodTypesArray.getJSONObject(i);
 
+                                long foodTypesId = foodTypesObj.getLong("id");
+                                String foodTypesName = foodTypesObj.getString("name");
+                                String foodTypesPictureUrl = foodTypesObj.getString("pictureUrl");
+                                Integer foodTypesIdProperty = foodTypesObj.getInt("idProperty");
+                                JSONArray foodItemsArray = foodTypesObj.getJSONArray("foodItemInfos");
+                                List<Food> foodItemsList = new ArrayList<>();
 
+                                for (int j = 0; j < foodItemsArray.length(); j++) {
+                                    JSONObject foodItemsObj = foodItemsArray.getJSONObject(j);
+                                    long foodItemsId = foodItemsObj.getLong("id");
+                                    String foodItemsName = foodItemsObj.getString("name");
+                                    Double foodItemsPrice = foodItemsObj.getDouble("price");
+                                    String foodItemsDescription = foodItemsObj.getString("description");
+                                    Double foodItemsWeight = foodItemsObj.getDouble("weight");
+                                    String foodItemsPictureUrl = foodItemsObj.getString("pictureUrl");
+
+                                    Food foodItem = new Food(foodItemsId, foodItemsName, foodItemsPrice, foodItemsDescription, foodItemsWeight, foodItemsPictureUrl);
+                                    foodItemsList.add(foodItem);
+                                }
+
+                                FoodType foodType = new FoodType(foodTypesId, foodTypesName, foodTypesPictureUrl, foodTypesIdProperty, foodItemsList);
+                                foodCategories.add(foodType);
+                            }
+
+                            restaurant.setFoodCategories(foodCategories);
+
+                            return restaurant;
+                        }
+
+                    }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // TODO: Handle error
+                    Toast.makeText(MenuActivity.this, "There was an error loading the menu.Please try again.", Toast.LENGTH_LONG).show();
+
+                }
+            });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(jsonObjectRequest);
+        }
     }
 
     @Override
-    public  boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main,menu);
+        menuInflater.inflate(R.menu.menu_main, menu);
 
         return true;
     }
 
     @Override
-    public  boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int res_id = item.getItemId();
-        if(res_id==R.id.cart)
-        {
+        if (res_id == R.id.cart) {
             Intent intent = new Intent(MenuActivity.this, AddToCartActivity.class);
             startActivity(intent);
-        }
-        else if(res_id==R.id.account){
+        } else if (res_id == R.id.account) {
             Intent intent = new Intent(MenuActivity.this, AccountManagementActivity.class);
             startActivity(intent);
         }
@@ -160,47 +200,7 @@ public class MenuActivity extends AppCompatActivity{
     }
 
 
-    public void parseData(JSONObject response, List<FoodType> foodTypesList) {
-
-        try {
-            JSONObject jsonObject = new JSONObject(String.valueOf(response));
-            if (jsonObject.getString("status").equals("true")) {
-                JSONArray foodTypesArray = jsonObject.getJSONArray("foodCategories");
-                for (int i = 0; i < foodTypesArray.length(); i++) {
-
-                    JSONObject foodTypesObj = foodTypesArray.getJSONObject(i);
-                    long foodTypesId = foodTypesObj.getLong("id");
-                    String foodTypesName = foodTypesObj.getString("name");
-                    String foodTypesPictureUrl = foodTypesObj.getString("pictureUrl");
-                    Integer foodTypesIdProperty = foodTypesObj.getInt("idProperty");
-                    JSONArray foodItemsArray = foodTypesObj.getJSONArray("foodItemInfos");
-                    List<Food> foodItemsList = new ArrayList<>();
-
-                    for(int j = 0; j < foodItemsArray.length(); j++){
-                        JSONObject foodItemsObj = foodItemsArray.getJSONObject(j);
-                        long foodItemsId = foodItemsObj.getLong("id");
-                        String foodItemsName = foodItemsObj.getString("name");
-                        Double foodItemsPrice = foodItemsObj.getDouble("price");
-                        String foodItemsDescription = foodItemsObj.getString("description");
-                        Double foodItemsWeight = foodItemsObj.getDouble("weight");
-                        String foodItemsPictureUrl = foodItemsObj.getString("pictureUrl");
-
-                        Food foodItem = new Food(foodItemsId,foodItemsName,foodItemsPrice,foodItemsDescription,foodItemsWeight,foodItemsPictureUrl);
-                        foodItemsList.add(foodItem);
-                    }
-
-                    FoodType foodType = new FoodType(foodTypesId,foodTypesName,foodTypesPictureUrl,foodTypesIdProperty,foodItemsList);
-                    foodTypesList.add(foodType);
-
-                }
-
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);

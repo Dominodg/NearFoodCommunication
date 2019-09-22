@@ -13,8 +13,6 @@ import com.nearfoodcommunication.main.R;
 
 import java.util.List;
 
-import static com.nearfoodcommunication.register.SaveSharedPreference.getPropertyId;
-
 public class AddToCartActivity extends AppCompatActivity {
 
     ListView foodListView;

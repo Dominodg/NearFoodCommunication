@@ -3,30 +3,30 @@ package com.nearfoodcommunication.order;
 import java.util.List;
 
 public class Order {
-    private Integer tableNumber;
-    private Long propertyId;
+    private Integer table;
+    private Long idProperty;
     private List<OrderLine> orderLine;
 
-    public Order(Integer tableNumber, Long propertyId, List<OrderLine> orderLine) {
-        this.tableNumber = tableNumber;
-        this.propertyId = propertyId;
+    public Order(Integer table, Long idProperty, List<OrderLine> orderLine) {
+        this.table = table;
+        this.idProperty = idProperty;
         this.orderLine = orderLine;
     }
 
-    public Integer getTableNumber() {
-        return tableNumber;
+    public Integer getTable() {
+        return table;
     }
 
-    public void setTableNumber(Integer tableNumber) {
-        this.tableNumber = tableNumber;
+    public void setTable(Integer table) {
+        this.table = table;
     }
 
-    public Long getPropertyId() {
-        return propertyId;
+    public Long getIdProperty() {
+        return idProperty;
     }
 
-    public void setPropertyId(Long propertyId) {
-        this.propertyId = propertyId;
+    public void setIdProperty(Long idProperty) {
+        this.idProperty = idProperty;
     }
 
     public List<OrderLine> getOrderLine() {

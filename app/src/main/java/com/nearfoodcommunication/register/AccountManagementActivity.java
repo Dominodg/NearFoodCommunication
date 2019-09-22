@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.nearfoodcommunication.main.R;
 
@@ -25,6 +26,8 @@ public class AccountManagementActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.activity_account_management);
             logoutButton = findViewById(R.id.logoutButton);
+            TextView email = findViewById(R.id.email);
+            email.setText("Logged as: "+SaveSharedPreference.getUserName(this));
 
             logoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override

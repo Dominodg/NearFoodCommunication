@@ -25,7 +25,9 @@ import static com.nearfoodcommunication.register.SaveSharedPreference.setUserNam
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String LOGIN_BASE_URL = "http://ec2-3-15-158-123.us-east-2.compute.amazonaws.com:8080/login/";
+    //public static final String LOGIN_BASE_URL = "http://ec2-3-15-158-123.us-east-2.compute.amazonaws.com:8080/login/";
+    public static final String LOGIN_BASE_URL = "http://ec2-18-217-70-227.us-east-2.compute.amazonaws.com:8080/login/";
+
 
     private EditText emailAddress;
     private EditText password;
@@ -37,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_log_in);
 
         emailAddress = (EditText) findViewById(R.id.etEmailAddress);
         password = (EditText) findViewById(R.id.etPasswordSU);

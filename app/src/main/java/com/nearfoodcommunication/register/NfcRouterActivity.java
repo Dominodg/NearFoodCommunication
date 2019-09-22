@@ -90,8 +90,8 @@ public class NfcRouterActivity extends AppCompatActivity {
         if (nfcTagDataPieces.length == 1) {
             Intent intent = new Intent(NfcRouterActivity.this, MenuActivity.class);
 
-            int propertyId = Integer.parseInt(nfcTagDataPieces[0]);
-            intent.putExtra(NFC_PARAM_PROPERTYID, propertyId);
+            long propertyId = Long.parseLong(nfcTagDataPieces[0]);
+            SaveSharedPreference.setPropertyIdNFC(context,propertyId);
 
             startActivity(intent);
         } else {
@@ -99,14 +99,14 @@ public class NfcRouterActivity extends AppCompatActivity {
                 Intent intent = new Intent(NfcRouterActivity.this, OrderPlacedActivity.class);
 
                 int tableNumber = Integer.parseInt(nfcTagDataPieces[1]);
-                intent.putExtra(NFC_PARAM_TABLE_NUMBER, tableNumber);
+                SaveSharedPreference.setTableNumber(context,tableNumber);
 
                 startActivity(intent);
             } else {
                 Intent intent = new Intent(NfcRouterActivity.this, MenuActivity.class);
 
-                int propertyId = Integer.parseInt(nfcTagDataPieces[0]);
-                intent.putExtra(NFC_PARAM_PROPERTYID, propertyId);
+                long propertyId = Long.parseLong(nfcTagDataPieces[0]);
+                SaveSharedPreference.setPropertyIdNFC(context,propertyId);
 
                 startActivity(intent);
             }

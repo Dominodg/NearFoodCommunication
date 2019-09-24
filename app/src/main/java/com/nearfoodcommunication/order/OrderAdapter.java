@@ -56,7 +56,7 @@ public class OrderAdapter extends ArrayAdapter<OrderLine> {
         tvFoodname.setText(foodname);
         tvFooddescription.setText(fooddescription);
         tvFoodprice.setText(foodprice.toString());
-        tvFoodquantity.setText(foodquantity.toString());
+        tvFoodquantity.setText(foodquantity.toString() + "×");
         Picasso.with(mContext).load(foodpicture).into(ivImgid);
 
         remove.setOnClickListener(new View.OnClickListener() {

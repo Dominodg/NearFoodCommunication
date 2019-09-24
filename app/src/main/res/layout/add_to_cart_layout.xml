@@ -10,14 +10,14 @@
 
     <ImageView
         android:id="@+id/ImageView"
-        android:layout_width="120dp"
+        android:layout_width="180dp"
         android:layout_height="116dp"
         android:layout_margin="5dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginLeft="3dp"
         android:layout_marginTop="3dp"
         android:layout_weight="25"
         android:gravity="center"
+        android:padding="3dp"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvQuantity" />
 
@@ -32,7 +32,10 @@
         android:layout_marginRight="3dp"
         android:layout_weight="55"
         android:gravity="center_horizontal|center_vertical"
-        app:layout_constraintEnd_toStartOf="@+id/remove"
+        android:textColor="#FF000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/pret"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ImageView"
         app:layout_constraintTop_toBottomOf="@+id/tvQuantity" />
@@ -47,7 +50,8 @@
         android:layout_marginEnd="3dp"
         android:layout_marginRight="3dp"
         android:layout_weight="55"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="left|center_vertical"
+        android:padding="3dp"
         app:layout_constraintEnd_toStartOf="@+id/pret"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ImageView"
@@ -55,27 +59,33 @@
 
     <Button
         android:id="@+id/remove"
-        android:layout_width="65dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="3dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
 
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="3dp"
         android:layout_marginRight="3dp"
         android:layout_weight="20"
-        android:text="Remove"
-        android:textSize="10sp"
+        android:gravity="center|center_vertical"
+        android:text="×"
+        android:textColor="#FF000000"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvQuantity" />
 
     <TextView
         android:id="@+id/pret"
-        android:layout_width="65dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="3dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="3dp"
         android:layout_marginRight="3dp"
         android:layout_weight="20"
+        android:background="@drawable/rouded_text"
         android:gravity="center_horizontal|center_vertical"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/remove" />
 
@@ -89,6 +99,9 @@
         android:layout_marginEnd="3dp"
         android:layout_marginRight="3dp"
         android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

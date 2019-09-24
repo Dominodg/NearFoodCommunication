@@ -2,6 +2,7 @@
 
 package com.nearfoodcommunication.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.nearfoodcommunication.database.Database;
 import com.nearfoodcommunication.register.LoginActivity;
 import com.nearfoodcommunication.register.SaveSharedPreference;
 
@@ -16,6 +18,8 @@ import com.nearfoodcommunication.register.SaveSharedPreference;
 public class MainActivity extends AppCompatActivity {
 
     public static String TAG = "NFCLINK" + MainActivity.class.getSimpleName();
+    Database db;
+    Context context=this;
 
 
     @Override
@@ -23,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Log.i(TAG, "getLink");
+
+        db = new Database(this);
+        db.cleanCart();
 
         if(SaveSharedPreference.getUserName(MainActivity.this).length() == 0)
         {

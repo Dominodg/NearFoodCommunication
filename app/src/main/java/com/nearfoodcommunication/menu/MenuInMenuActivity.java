@@ -16,6 +16,7 @@ import com.nearfoodcommunication.main.R;
 import com.nearfoodcommunication.menu.adapter.FoodListAdapter;
 import com.nearfoodcommunication.menu.model.Food;
 import com.nearfoodcommunication.menu.model.FoodType;
+import com.nearfoodcommunication.menu.model.Restaurant;
 import com.nearfoodcommunication.order.AddToCartActivity;
 import com.nearfoodcommunication.register.AccountManagementActivity;
 
@@ -33,6 +34,7 @@ public class MenuInMenuActivity extends AppCompatActivity {
     TextView tvRestaurantName;
     Button addtocart;
     Toolbar toolBar;
+    Restaurant restaurant;
 
 
     @Override
@@ -50,10 +52,6 @@ public class MenuInMenuActivity extends AppCompatActivity {
         tvRestaurantName = findViewById(R.id.tvRestaurantName);
         foodlist = findViewById(R.id.listFood);
         addtocart=findViewById(R.id.addtocart);
-
-        ivRestaurant.setImageResource(R.drawable.restaurant);
-        tvRestaurantName.setText("nume");
-
         List<Food> foodList = new ArrayList<>();
 
         Bundle bundle = getIntent().getExtras();
@@ -66,6 +64,10 @@ public class MenuInMenuActivity extends AppCompatActivity {
 
             tvFoodType.setText(foodtype.getFoodName());
         }
+
+        ivRestaurant.setImageResource(R.drawable.restaurant);
+        tvRestaurantName.setText("nume");
+
 
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.menu_in_menu_layout, foodList);
         foodlist.setAdapter(adapter);

@@ -29,11 +29,6 @@
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/tech_filter" />
         </activity>
-        <activity
-            android:name=".BeamMessage"
-            android:label="@string/title_activity_beam_message"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>

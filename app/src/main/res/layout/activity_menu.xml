@@ -54,20 +54,20 @@
     <ImageView
         android:id="@+id/ImageView"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_margin="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_height="272dp"
+        android:layout_margin="0dp"
         android:layout_weight="100"
         android:gravity="center"
+        android:scaleType="fitXY"
         android:text="ImageView"
-        app:layout_constraintDimensionRatio="w,0:0"
+        android:visibility="visible"
+        app:layout_constraintDimensionRatio="1.1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:srcCompat="@drawable/drinks"
+        tools:visibility="visible" />
 
     <ListView
         android:id="@+id/listFoodTypes"
@@ -94,19 +94,16 @@
         android:id="@+id/tvRestaurantName"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginBottom="60dp"
+        android:background="#59980F02"
         android:gravity="center"
         android:text="TextView"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ImageView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="80sp"
+        app:layout_constraintBottom_toTopOf="@+id/listFoodTypes"
+        app:layout_constraintEnd_toEndOf="@+id/ImageView"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/ImageView"
-        app:layout_constraintTop_toTopOf="@+id/ImageView" />
+        app:layout_constraintTop_toTopOf="@+id/ImageView"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -11,11 +11,12 @@
 
     <ImageView
         android:id="@+id/ImageView"
-        android:layout_width="120dp"
-        android:layout_height="116dp"
+        android:layout_width="173dp"
+        android:layout_height="112dp"
         android:layout_margin="5dp"
         android:layout_weight="25"
         android:gravity="center"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,6 +64,7 @@
         android:layout_weight="20"
         android:alpha="100"
         android:background="@drawable/addtocart"
+        android:hapticFeedbackEnabled="true"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/descriere"
         app:layout_constraintEnd_toEndOf="parent"

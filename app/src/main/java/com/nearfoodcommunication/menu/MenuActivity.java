@@ -87,7 +87,7 @@ public class MenuActivity extends AppCompatActivity {
                     tvRestaurantName.setText(restaurant.getPropertyName());
 
                     ivRestaurant = (ImageView) findViewById(R.id.ImageView);
-                    Picasso.with(context).load(urlPicture).into(ivRestaurant);
+                    Picasso.with(context).load("https://www.adlers-innsbruck.com/fileadmin/_processed_/6/4/csm_restaurant-img-02_d666f4932c.jpg").into(ivRestaurant);
 
                     setPropertyId(context, restaurant.getPropertyId());
 

@@ -1,5 +1,6 @@
 package com.nearfoodcommunication.menu;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.nearfoodcommunication.menu.model.FoodType;
 import com.nearfoodcommunication.menu.model.Restaurant;
 import com.nearfoodcommunication.order.AddToCartActivity;
 import com.nearfoodcommunication.register.AccountManagementActivity;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class MenuInMenuActivity extends AppCompatActivity {
     Button addtocart;
     Toolbar toolBar;
     Restaurant restaurant;
+    Context context = this;
 
 
     @Override
@@ -62,10 +65,11 @@ public class MenuInMenuActivity extends AppCompatActivity {
 
             foodList = foodtype.getFoodItems();
 
+            Picasso.with(context).load(foodtype.getFoodPicture()).into(ivRestaurant);
+
             tvFoodType.setText(foodtype.getFoodName());
         }
 
-        ivRestaurant.setImageResource(R.drawable.restaurant);
         tvRestaurantName.setText("nume");
 
 

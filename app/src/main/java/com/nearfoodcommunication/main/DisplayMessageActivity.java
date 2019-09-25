@@ -9,17 +9,23 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.nearfoodcommunication.database.Database;
+
 public class DisplayMessageActivity extends AppCompatActivity {
 
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     Context context;
     IntentFilter writeTagFilters[];
+    Database db;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        db = new Database(this);
+        db.cleanCart();
 
         setContentView(R.layout.activity_display_message);
 

@@ -95,7 +95,6 @@ public class OrderPlacedActivity extends AppCompatActivity {
     }
 
     private void orderPlacedSuccessfully() {
-        Toast.makeText(OrderPlacedActivity.this, "ORDER SAVED", Toast.LENGTH_LONG).show();
 
         setContentView(R.layout.activity_order_placed);
 

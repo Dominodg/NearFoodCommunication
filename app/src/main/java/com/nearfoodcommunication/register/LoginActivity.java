@@ -137,7 +137,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
-                        Toast.makeText(LoginActivity.this, "NOT OK", Toast.LENGTH_LONG).show();
                         info.setText("There was an error. Please try again");
 
                     }

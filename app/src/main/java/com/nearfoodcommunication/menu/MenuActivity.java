@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.nearfoodcommunication.database.Database;
 import com.nearfoodcommunication.main.R;
 import com.nearfoodcommunication.menu.adapter.FoodTypeListAdapter;
 import com.nearfoodcommunication.menu.model.Food;
@@ -54,6 +55,7 @@ public class MenuActivity extends AppCompatActivity {
     TextView tvRestaurantName;
     Toolbar toolBar;
     String urlPicture;
+
 
 
     @Override
